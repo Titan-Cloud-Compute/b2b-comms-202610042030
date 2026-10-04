@@ -85,8 +85,16 @@ export class AdminAuditLogComponent implements OnInit {
     this.loading = true;
     this.error = null;
     try {
-      const res = await this.api.get<AuditEntry[]>(AUDIT_LOG_PATH);
-      this.entries = this.sort(Array.isArray(res) ? res : []);
+      const res = await this.api.get<unknown>(AUDIT_LOG_PATH);
+      const r = res as { rows?: unknown; items?: unknown } | null;
+      const list = Array.isArray(res)
+        ? res
+        : Array.isArray(r?.rows)
+          ? (r!.rows as unknown[])
+          : Array.isArray(r?.items)
+            ? (r!.items as unknown[])
+            : [];
+      this.entries = this.sort(list.map((x) => this.normalise(x)));
     } catch (e: any) {
       this.error = e?.message || 'Failed to load audit log';
       this.entries = [];
@@ -101,18 +109,28 @@ export class AdminAuditLogComponent implements OnInit {
     this.saving = true;
     this.error = null;
     try {
-      const created = await this.api.post<AuditEntry>(AUDIT_LOG_PATH, {
+      const created = await this.api.post<unknown>(AUDIT_LOG_PATH, {
         action: action.trim(),
         userId: userId.trim(),
       });
       if (created) {
-        this.entries = this.sort([...this.entries, { ...created, userId: created.userId ?? userId.trim() }]);
+        this.entries = this.sort([...this.entries, this.normalise(created, userId.trim())]);
       }
     } catch (e: any) {
       this.error = e?.message || 'Failed to record audit entry';
     } finally {
       this.saving = false;
     }
+  }
+
+  private normalise(raw: unknown, fallbackUserId = ''): AuditEntry {
+    const o = (raw ?? {}) as Record<string, unknown>;
+    return {
+      id: String(o['id'] ?? ''),
+      action: String(o['action'] ?? ''),
+      userId: String(o['userId'] ?? o['actorUserId'] ?? fallbackUserId),
+      createdAt: String(o['createdAt'] ?? ''),
+    };
   }
 
   private sort(list: AuditEntry[]): AuditEntry[] {
