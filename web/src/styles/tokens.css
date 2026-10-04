@@ -135,3 +135,57 @@
   --chat-header-bg: linear-gradient(180deg, var(--color-primary-light), var(--color-surface));
   --chat-composer-bg: var(--color-bg-secondary);
 }
+
+/* ---- Styling card (one visual system): overlays, spacing, type scale, breakpoints ---- */
+:root {
+  --color-overlay: rgba(14, 23, 38, 0.45);
+  --color-overlay-strong: rgba(14, 23, 38, 0.6);
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+
+  /* Font-size scale */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 0.9375rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-input: 16px;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-body: 1.5;
+
+  /* Layout */
+  --page-max-width: 1100px;
+  --bp-mobile: 640px; /* reference value; media queries cannot read var() */
+}
+
+/* ---- Shadows (moved from styles.css) ---- */
+:root {
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-popup: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-modal: 0 10px 40px rgba(0, 0, 0, 0.2);
+  --shadow-drawer: -4px 0 24px rgba(0, 0, 0, 0.2);
+  --shadow-nav: 0 1px 3px rgba(14, 23, 38, 0.08);
+  --shadow-header: 0 -1px 3px rgba(14, 23, 38, 0.08);
+  --shadow-sidebar: 1px 0 3px rgba(14, 23, 38, 0.05);
+  --shadow-hover: 0 4px 14px rgba(0, 0, 0, 0.08);
+  --shadow-floating: 0 4px 14px rgba(14, 23, 38, 0.22);
+  --shadow-hover-lg: 0 6px 16px rgba(0, 0, 0, 0.12);
+  --shadow-focus: 0 0 0 3px rgba(var(--color-primary-rgb), 0.15);
+}
+
+/* ---- Styling card: extra semantic tokens ---- */
+:root {
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, monospace;
+  --color-success-light: #f0fdf4;
+}

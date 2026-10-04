@@ -121,8 +121,8 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
     .impersonation-banner .imp-exit:hover { background: var(--color-error-bg); }
     .layout {
       display: flex;
-      margin-top: var(--imp-h, 0px);
-      min-height: calc(100vh - var(--imp-h, 0px));
+      margin-top: var(--imp-h);
+      min-height: calc(100vh - var(--imp-h));
       background: var(--color-bg-secondary);
     }
 
@@ -134,7 +134,7 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
       left: 0;
       right: 0;
       height: 56px;
-      background: white;
+      background: var(--color-surface);
       border-bottom: 1px solid var(--color-border);
       padding: 0 1rem;
       align-items: center;
@@ -187,7 +187,7 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
     }
 
     .mobile-lang-btn.active {
-      background: white;
+      background: var(--color-surface);
       color: var(--color-primary);
       box-shadow: var(--shadow-card);
     }
@@ -200,7 +200,7 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
       overflow-y: auto;
       overflow-x: hidden;
       overscroll-behavior-y: contain;
-      height: calc(100vh - var(--imp-h, 0px));
+      height: calc(100vh - var(--imp-h));
       /* Flex column so the shell — not each page — owns vertical space:
          routed content flexes into the space left over, and chrome (the
          support footer) keeps its intrinsic height. Pages whose :host is
@@ -273,7 +273,7 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: var(--color-overlay-strong);
       z-index: 150;
     }
 
@@ -285,7 +285,7 @@ import { NavItem, FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_M
       left: 0;
       right: 0;
       height: 64px;
-      background: white;
+      background: var(--color-surface);
       border-top: 1px solid var(--color-border);
       padding-bottom: env(safe-area-inset-bottom);
       z-index: 100;

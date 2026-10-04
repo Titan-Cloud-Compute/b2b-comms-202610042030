@@ -8,31 +8,14 @@
 :root {
   --imp-h: 0px;
 
-  /* Font-size scale */
-  --font-size-xs: 0.75rem;    /* 12px – smallest labels / tags */
-  --font-size-sm: 0.875rem;   /* 14px – secondary text, buttons */
-  --font-size-md: 0.9375rem;  /* 15px – comfortable body text */
-  --font-size-lg: 1.125rem;   /* 18px – section headings */
-  --font-size-xl: 1.5rem;     /* 24px – page headings */
-  --font-size-2xl: 2rem;      /* 32px – hero headings */
-  --font-size-input: 16px;    /* iOS-zoom-safe input size */
+  /* Font-size scale lives in styles/tokens.css */
 
   /* Radius tokens not covered by tokens.css */
   --radius-xs: 4px;
   --radius-btn: 8px;
   --radius-card: 12px;
 
-  /* Shadow tokens not covered by tokens.css */
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-popup: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --shadow-modal: 0 10px 40px rgba(0, 0, 0, 0.2);
-  --shadow-drawer: -4px 0 24px rgba(0, 0, 0, 0.2);
-  --shadow-nav: 0 1px 3px rgba(14, 23, 38, 0.08);
-  --shadow-header: 0 -1px 3px rgba(14, 23, 38, 0.08);
-  --shadow-sidebar: 1px 0 3px rgba(14, 23, 38, 0.05);
-  --shadow-hover: 0 4px 14px rgba(0, 0, 0, 0.08);
-  --shadow-hover-lg: 0 6px 16px rgba(0, 0, 0, 0.12);
-  --shadow-focus: 0 0 0 3px rgba(var(--color-primary-rgb), 0.15);
+  /* Shadow tokens live in styles/tokens.css */
 
   /* Radius for circular elements (avatars, spinners) */
   --radius-circle: 50%;
@@ -202,7 +185,7 @@ html {
   line-height: 1.35;
   white-space: normal;
   text-align: center;
-  box-shadow: 0 4px 14px rgba(14, 23, 38, 0.22);
+  box-shadow: var(--shadow-floating);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -265,4 +248,124 @@ body:has(app-intake .chat-window) app-root > app-intake > .intake-page {
 
 body:has(app-intake .chat-window) app-root > app-support-footer {
   flex: 0 0 auto;
+}
+
+/* ── Shared page primitives (styling card) ─────────────────────────────────
+ * Every feature page wraps its content in `.page` and its sections in `.card`.
+ * Token-only: colour, type and spacing come from styles/tokens.css.          */
+.page {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-body);
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  min-width: 0;
+}
+.page h1 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+.page h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin: 0 0 var(--space-3);
+}
+.page h3 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  margin: var(--space-3) 0 var(--space-2);
+}
+.page p { margin: 0 0 var(--space-2); color: var(--color-text-secondary); }
+.page [role="alert"] {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-error-50);
+  color: var(--color-error-700);
+}
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+  min-width: 0;
+  overflow-x: auto;
+}
+.page form { display: flex; flex-direction: column; gap: var(--space-3); }
+.page form > div,
+.page label + input,
+.page label + select,
+.page label + textarea { min-width: 0; }
+.page form > div { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.page label { font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--color-text-secondary); }
+.page input:not([type="checkbox"]):not([type="radio"]),
+.page select,
+.page textarea {
+  font: inherit;
+  font-size: var(--font-size-input);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  min-width: 0;
+  max-width: 100%;
+}
+.page input:focus,
+.page select:focus,
+.page textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: var(--shadow-focus); }
+.page button {
+  font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+.page button:hover:not(:disabled) { background: var(--color-surface-hover); }
+.page button[type="submit"] {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+.page button[type="submit"]:hover:not(:disabled) { background: var(--color-primary-hover); }
+.page button:disabled { opacity: 0.6; cursor: not-allowed; }
+.page ul { list-style: none; margin: 0; padding: 0; }
+.page li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-light);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.page li:last-child { border-bottom: none; }
+.page table { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); }
+.page th,
+.page td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border-light); }
+.page th { color: var(--color-text-secondary); font-weight: var(--font-weight-semibold); }
+
+@media (max-width: 640px) {
+  .page { padding: var(--space-4); gap: var(--space-4); }
+  .card { padding: var(--space-4); }
+  .page form > div { flex-direction: column; align-items: stretch; }
+  .page input:not([type="checkbox"]):not([type="radio"]),
+  .page select,
+  .page textarea,
+  .page button[type="submit"] { width: 100%; }
+  .page table { display: block; overflow-x: auto; max-width: 100%; }
 }

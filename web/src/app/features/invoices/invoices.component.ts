@@ -31,10 +31,10 @@ function registerInvoiceMocks(api: ApiClient): void {
   standalone: true,
   imports: [FormsModule],
   template: `
-    <div data-testid="invoices-screen">
+    <div class="page" data-testid="invoices-screen">
       <h1>Invoices</h1>
 
-      <section>
+      <section class="card">
         <h2>Generate invoice</h2>
         <p>When a vendor generates an invoice for a confirmed order, the invoice is created and returns 201 with the invoice id available for download.</p>
         <form (ngSubmit)="generate()">
@@ -54,7 +54,7 @@ function registerInvoiceMocks(api: ApiClient): void {
         }
       </section>
 
-      <section>
+      <section class="card">
         <h2>Download invoice</h2>
         <p>When the customer requests the invoice download link, the response returns 200 with a downloadUrl pointing to the stored invoice.</p>
         <form (ngSubmit)="download()">

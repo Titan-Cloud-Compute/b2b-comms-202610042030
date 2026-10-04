@@ -36,10 +36,10 @@ function registerCustomerInviteMocks(client: MockApiClient): void {
   standalone: true,
   imports: [FormsModule],
   template: `
-    <div data-testid="admin-customers-screen">
+    <div class="page" data-testid="admin-customers-screen">
       <h1>Customer Management</h1>
 
-      <section>
+      <section class="card">
         <h2>Invite a customer</h2>
         <form (ngSubmit)="invite()">
           <label for="invite-email">Customer email</label>
@@ -69,7 +69,7 @@ function registerCustomerInviteMocks(client: MockApiClient): void {
         </ul>
       </section>
 
-      <section>
+      <section class="card">
         <h2>Customers</h2>
         <ul data-testid="customer-list">
           @for (c of customers(); track c.id) {

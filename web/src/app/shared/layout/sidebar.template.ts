@@ -4,7 +4,7 @@ export const SIDEBAR_TEMPLATE = `
         <div class="logo">
           <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
             <rect width="48" height="48" rx="12" style="fill: var(--color-primary)"/>
-            <path d="M14 24L22 32L34 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 24L22 32L34 16" style="stroke: var(--color-on-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <div class="logo-text">
@@ -22,7 +22,7 @@ export const SIDEBAR_TEMPLATE = `
 
       <nav class="sidebar-nav">
         @if (!auth.hasAdminRole()) {
-          <div class="nav-group-label">{{ 'Workspace' }}</div>
+          <div class="nav-group-label">{{ 'Main' }}</div>
           @for (item of firmNavItems; track item.label) {
             <a
               [routerLink]="item.path"
@@ -46,6 +46,23 @@ export const SIDEBAR_TEMPLATE = `
                 routerLinkActive="active"
                 class="nav-item nav-link"
                 (click)="onAdminNavClick(item.label)"
+              >
+                <span class="nav-icon" [innerHTML]="item.icon | safeHtml"></span>
+                <span class="nav-label">{{ item.label }}</span>
+              </a>
+            }
+          }
+        }
+
+        @for (group of navGroups; track group) {
+          @if (featureNavByGroup[group].length) {
+            <div class="nav-group-label">{{ group }}</div>
+            @for (item of featureNavByGroup[group]; track item.path) {
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="active"
+                class="nav-item"
+                (click)="navClick.emit()"
               >
                 <span class="nav-icon" [innerHTML]="item.icon | safeHtml"></span>
                 <span class="nav-label">{{ item.label }}</span>

@@ -22,12 +22,12 @@ const mockEntries: AuditEntry[] = [
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div data-testid="admin-audit-log-screen">
+    <div class="page" data-testid="admin-audit-log-screen">
       <h1>Audit Log</h1>
       <p data-testid="audit-log-view-caption">a list of AuditEntry records is displayed in chronological order returns 200</p>
       <p data-testid="audit-log-record-caption">the AuditEntry is stored and returns 201 with the created record</p>
 
-      <form data-testid="audit-log-form" (submit)="record($event, actionInput.value, userIdInput.value); actionInput.value = ''">
+      <form class="card" data-testid="audit-log-form" (submit)="record($event, actionInput.value, userIdInput.value); actionInput.value = ''">
         <label>Action <input #actionInput data-testid="audit-log-action" name="action" required /></label>
         <label>User ID <input #userIdInput data-testid="audit-log-user-id" name="userId" required /></label>
         <button type="submit" data-testid="audit-log-submit" [disabled]="saving">Record entry</button>

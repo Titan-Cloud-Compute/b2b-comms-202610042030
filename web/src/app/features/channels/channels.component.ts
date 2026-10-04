@@ -21,10 +21,10 @@ const MESSAGE_STORED_TEXT = 'the message is stored and returns 201 with the crea
   standalone: true,
   imports: [FormsModule],
   template: `
-    <div data-testid="channels-screen">
+    <div class="page" data-testid="channels-screen">
       <h1>Channels</h1>
 
-      <section>
+      <section class="card">
         <h2>Create a shared channel</h2>
         <form data-testid="channel-create-form" (ngSubmit)="createChannel()">
           <label for="channel-name">Channel name</label>
@@ -41,7 +41,7 @@ const MESSAGE_STORED_TEXT = 'the message is stored and returns 201 with the crea
         <p role="alert" data-testid="channels-error">{{ error() }}</p>
       }
 
-      <section>
+      <section class="card">
         <h2>Your channels</h2>
         <ul data-testid="channel-list">
           @for (ch of channels(); track ch.id) {

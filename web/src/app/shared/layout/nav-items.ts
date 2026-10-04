@@ -5,7 +5,14 @@ export interface NavItem {
   adminOnly?: boolean;
   superAdminOnly?: boolean;
   tab?: string;
+  /** Sidebar nav group the entry is listed under. */
+  group?: NavGroup;
 }
+
+export type NavGroup = 'Vendor' | 'Customer' | 'Admin';
+
+/** Order in which the feature nav groups render in the sidebar. */
+export const NAV_GROUPS: NavGroup[] = ['Vendor', 'Customer', 'Admin'];
 
 /** Entries shown to signed-in users (non-admin shell). */
 export const FIRM_NAV_ITEMS: NavItem[] = [
@@ -48,14 +55,16 @@ export const ADMIN_TAB_MAP: Record<string, string> = {
   'Users': 'users',
   'App Settings': 'app-settings',
 };
+/** Story feature pages, grouped (Vendor / Customer / Admin) and shown to every signed-in role. */
+export const FEATURE_NAV_ITEMS: NavItem[] = [];
 // <<codegen:nav-items:start>>
-FIRM_NAV_ITEMS.push(
-  { path: '/vendor/profile', label: 'Vendor Profile', icon: '' },
-  { path: '/admin/customers', label: 'Customer Management', icon: '' },
-  { path: '/channels', label: 'Channels', icon: '' },
-  { path: '/orders', label: 'Orders', icon: '' },
-  { path: '/invoices', label: 'Invoices', icon: '' },
-  { path: '/settings/notifications', label: 'Notification Settings', icon: '' },
-  { path: '/admin/audit-log', label: 'Audit Log', icon: '' },
+FEATURE_NAV_ITEMS.push(
+  { path: '/vendor/profile', label: 'Vendor Profile', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg>', group: 'Vendor' },
+  { path: '/admin/customers', label: 'Customer Management', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>', group: 'Admin' },
+  { path: '/channels', label: 'Channels', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>', group: 'Vendor' },
+  { path: '/orders', label: 'Orders', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>', group: 'Customer' },
+  { path: '/invoices', label: 'Invoices', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>', group: 'Vendor' },
+  { path: '/settings/notifications', label: 'Notification Settings', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>', group: 'Vendor' },
+  { path: '/admin/audit-log', label: 'Audit Log', icon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>', group: 'Admin' },
 );
 // <<codegen:nav-items:end>>

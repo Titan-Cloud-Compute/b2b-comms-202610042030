@@ -37,10 +37,10 @@ function registerVendorMocks(client: MockApiClient): void {
   standalone: true,
   imports: [FormsModule],
   template: `
-    <div data-testid="vendor-profile-screen">
+    <div class="page" data-testid="vendor-profile-screen">
       <h1>Vendor Profile</h1>
 
-      <section>
+      <section class="card">
         <h2>Company profile</h2>
         <p>When you submit your company profile, the profile is stored and returns 201 with the created VendorProfile record.</p>
         <form data-testid="vendor-profile-form" (ngSubmit)="submitProfile()">
@@ -59,7 +59,7 @@ function registerVendorMocks(client: MockApiClient): void {
         }
       </section>
 
-      <section>
+      <section class="card">
         <h2>Compliance documents</h2>
         <form data-testid="vendor-document-upload" (ngSubmit)="uploadDocument()">
           <label>

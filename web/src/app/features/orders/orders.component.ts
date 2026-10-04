@@ -20,14 +20,14 @@ export interface OrderItem {
   standalone: true,
   imports: [FormsModule],
   template: `
-    <div data-testid="orders-screen">
+    <div class="page" data-testid="orders-screen">
       <h1>Orders</h1>
 
       @if (error()) {
         <p role="alert" data-testid="order-error">{{ error() }}</p>
       }
 
-      <section>
+      <section class="card">
         <h2>Place a Purchase Order</h2>
         <form data-testid="order-create-form" (ngSubmit)="submitOrder()">
           <div>
@@ -75,7 +75,7 @@ export interface OrderItem {
         </form>
       </section>
 
-      <section>
+      <section class="card">
         <h2>My Orders</h2>
         <ul data-testid="order-list">
           @for (order of orders(); track order.id) {
@@ -86,7 +86,7 @@ export interface OrderItem {
         </ul>
       </section>
 
-      <section>
+      <section class="card">
         <h2>Vendor Queue</h2>
         <ul>
           @for (order of pendingOrders(); track order.id) {
@@ -110,7 +110,7 @@ export interface OrderItem {
         </ul>
       </section>
 
-      <section data-testid="order-lifecycle">
+      <section class="card" data-testid="order-lifecycle">
         <h2>How ordering works</h2>
         <p>When you submit a purchase order, the order is stored with status "pending" and returns 201 with the created Order record.</p>
         <p>When the vendor confirms it and sets an estimated delivery date, the order is updated to status "confirmed" and displays to the customer as confirmed.</p>

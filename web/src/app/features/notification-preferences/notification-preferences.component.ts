@@ -14,9 +14,9 @@ export interface NotificationPreferenceRecord {
   standalone: true,
   imports: [FormsModule],
   template: `
-    <div data-testid="settings-notifications-screen">
+    <div class="page" data-testid="settings-notifications-screen">
       <h1>Notification Settings</h1>
-      <form (ngSubmit)="save()">
+      <form class="card" (ngSubmit)="save()">
         <label>
           <input type="checkbox" data-testid="notif-order-alerts" name="orderAlerts"
                  [(ngModel)]="orderAlerts" />

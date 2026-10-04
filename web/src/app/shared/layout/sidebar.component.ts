@@ -4,7 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { SafeHtmlPipe } from '../safe-html.pipe';
 import { AuthApi } from '../api/auth-api.service';
-import { FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_MAP } from './nav-items';
+import { FIRM_NAV_ITEMS, ADMIN_NAV_ITEMS, SHARED_NAV_ITEMS, ADMIN_TAB_MAP, FEATURE_NAV_ITEMS, NAV_GROUPS, NavGroup, NavItem } from './nav-items';
 import { SIDEBAR_TEMPLATE } from './sidebar.template';
 
 @Component({
@@ -15,14 +15,14 @@ import { SIDEBAR_TEMPLATE } from './sidebar.template';
   styles: [`
     .sidebar {
       width: 260px;
-      background: white;
+      background: var(--color-surface);
       border-right: 1px solid var(--color-border);
       display: flex;
       flex-direction: column;
       position: fixed;
       /* Shift below the global impersonation banner when present (--imp-h is set
          on :root by the layout while "viewing as company"; 0 otherwise). */
-      top: var(--imp-h, 0px);
+      top: var(--imp-h);
       left: 0;
       bottom: 0;
       z-index: 200;
@@ -202,7 +202,7 @@ import { SIDEBAR_TEMPLATE } from './sidebar.template';
     }
 
     .lang-btn.active {
-      background: white;
+      background: var(--color-surface);
       color: var(--color-primary);
       box-shadow: var(--shadow-card);
     }
@@ -218,7 +218,7 @@ import { SIDEBAR_TEMPLATE } from './sidebar.template';
     }
 
     .lang-btn.active:disabled:hover {
-      background: white;
+      background: var(--color-surface);
       color: var(--color-primary);
     }
 
@@ -284,7 +284,7 @@ import { SIDEBAR_TEMPLATE } from './sidebar.template';
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
+      color: var(--color-on-primary);
       font-weight: 600;
       font-size: var(--font-size-sm);
       flex-shrink: 0;
@@ -382,6 +382,13 @@ export class SidebarComponent {
   openSettings = output<void>();
 
   readonly firmNavItems = FIRM_NAV_ITEMS;
+  // Story feature pages, rendered as Vendor / Customer / Admin groups for every role.
+  readonly navGroups = NAV_GROUPS;
+  readonly featureNavByGroup: Record<NavGroup, NavItem[]> = {
+    Vendor: FEATURE_NAV_ITEMS.filter(i => i.group === 'Vendor'),
+    Customer: FEATURE_NAV_ITEMS.filter(i => i.group === 'Customer'),
+    Admin: FEATURE_NAV_ITEMS.filter(i => i.group === 'Admin'),
+  };
   readonly adminNavItems = ADMIN_NAV_ITEMS;
   // Rendered for every role (see SHARED_NAV_ITEMS) — outside the role branches.
   readonly sharedNavItems = SHARED_NAV_ITEMS;
